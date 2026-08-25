@@ -95,22 +95,24 @@ body {
 
 .overlay {
     position: fixed;
-
     inset: 0;
-
     z-index: 5;
-
     pointer-events: none;
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.80) 0%,
-            rgba(0, 0, 0, 0.40) 45%,
-            rgba(0, 0, 0, 0.25) 100%
-        );
+    background: rgba(0, 0, 0, 0.15);
 }
 
+.vignette {
+    display: none;
+}
+
+.noise {
+    display: none;
+}
+
+.scanlines {
+    display: none;
+}
 
 /* Ombre sur les bords */
 
