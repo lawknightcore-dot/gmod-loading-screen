@@ -3,30 +3,45 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Legacy SCPRP</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>SCP Loading Screen</title>
+
+    <link rel="stylesheet" href="./style.css?v=50">
 </head>
 
 <body>
 
-    <!-- Deux fonds pour faire le fondu -->
-    <div id="background1" class="background active"></div>
-    <div id="background2" class="background"></div>
+    <!--
+        Deux images superposées.
+        Cela permet de faire un vrai fondu.
+    -->
 
-    <!-- Effets -->
-    <div class="overlay"></div>
-    <div class="vignette"></div>
-    <div class="scanlines"></div>
-    <div class="noise"></div>
+    <img
+        id="background1"
+        class="background active"
+        src="./images/scp966.png"
+        alt=""
+    >
 
-    <!-- Informations serveur -->
+    <img
+        id="background2"
+        class="background"
+        src="./images/scp106.png"
+        alt=""
+    >
+
+
+    <!-- INFORMATIONS SERVEUR -->
+
     <div class="server-info">
 
         <div id="serverName">
-            Legacy SCPRP      
+            SCP ROLEPLAY
         </div>
 
         <div id="mapName">
@@ -35,24 +50,28 @@
 
     </div>
 
-    <!-- Informations SCP -->
+
+    <!-- TITRE + DESCRIPTION -->
+
     <div id="scpInfo" class="scp-info">
 
         <h1 id="scpTitle">
-            SCP-035
+            SCP-966
         </h1>
 
         <div class="separator"></div>
 
         <p id="scpDescription">
-            SCP-035 est un masque ancien et conscient,
-            capable d'influencer mentalement et de posséder
-            quiconque le porte.
+            Des créatures presque invisibles à l'œil humain.
+            SCP-966 traque ses victimes en les privant progressivement
+            de sommeil, jusqu'à les pousser à l'épuisement total.
         </p>
 
     </div>
 
-    <!-- Barre de chargement -->
+
+    <!-- CHARGEMENT GMOD -->
+
     <div class="loading-container">
 
         <div class="loading-header">
@@ -67,9 +86,13 @@
 
         </div>
 
+
         <div class="progress-background">
+
             <div id="progressBar"></div>
+
         </div>
+
 
         <div id="fileName">
             Préparation de la connexion...
@@ -77,7 +100,8 @@
 
     </div>
 
-    <script src="script.js"></script>
+
+    <script src="./script.js?v=50"></script>
 
 </body>
 
