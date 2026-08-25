@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SCP Loading Screen</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- LES DEUX FONDS -->
+    <div id="background1" class="background active"></div>
+    <div id="background2" class="background"></div>
+
+
+    <!-- EFFETS -->
+    <div class="overlay"></div>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+
+
+    <!-- NOM DU SERVEUR -->
+    <div class="server">
+
+        <div id="serverName">
+            SCP ROLEPLAY
+        </div>
+
+        <div id="mapName">
+            CONNEXION AU SERVEUR
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION SCP -->
+    <div id="scpInfo" class="scp-info">
+
+        <h1 id="scpTitle">
+            SCP-035
+        </h1>
+
+        <div class="line"></div>
+
+        <p id="scpDescription">
+            SCP-035 est un masque ancien et conscient,
+            capable d'influencer mentalement et de posséder
+            quiconque le porte.
+        </p>
+
+    </div>
+
+
+    <!-- CHARGEMENT -->
+    <div class="loading">
+
+        <div class="loading-top">
+
+            <span id="status">
+                INITIALISATION...
+            </span>
+
+            <span id="percentage">
+                0%
+            </span>
+
+        </div>
+
+
+        <div class="progress-background">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+
+        <div id="fileName">
+            Préparation du serveur...
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
