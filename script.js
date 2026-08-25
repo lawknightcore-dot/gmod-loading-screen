@@ -125,7 +125,7 @@ if (backgroundMusic) {
 
     /* Volume : de 0 à 1 */
 
-    backgroundMusic.volume = 0.20;
+    backgroundMusic.volume = 0.10;
 
 
     /*
