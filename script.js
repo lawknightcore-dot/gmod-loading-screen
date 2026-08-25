@@ -1,13 +1,13 @@
-/* ============================================= */
-/* LISTE DES SCP                                 */
-/* ============================================= */
+/* ============================================== */
+/* LISTE DES SCP                                  */
+/* ============================================== */
 
 const slides = [
 
     {
         title: "SCP-035",
 
-        image: "images/scp035.png",
+        image: "images/scp035.webp",
 
         description:
             "SCP-035 est un masque ancien et conscient, capable d'influencer mentalement et de posséder quiconque le porte.",
@@ -20,36 +20,10 @@ const slides = [
     {
         title: "SCP-049",
 
-        image: "images/scp049.png",
+        image: "images/scp049.webp",
 
         description:
             "SCP-049 est une entité humanoïde connue sous le nom de Docteur de la Peste. Il affirme pouvoir guérir une mystérieuse pestilence.",
-
-        position:
-            "center center"
-    },
-
-
-    {
-        title: "SCP-096",
-
-        image: "images/scp096.png",
-
-        description:
-            "SCP-096 est un humanoïde extrêmement agressif. Lorsque son visage est observé, il entre dans un état de rage incontrôlable.",
-
-        position:
-            "center center"
-    },
-
-
-    {
-        title: "SCP-173",
-
-        image: "images/scp173.png",
-
-        description:
-            "SCP-173 est une statue extrêmement dangereuse capable de se déplacer à très grande vitesse lorsqu'elle n'est pas observée.",
 
         position:
             "center center"
@@ -58,9 +32,9 @@ const slides = [
 ];
 
 
-/* ============================================= */
-/* RÉCUPÉRATION DES ÉLÉMENTS HTML                */
-/* ============================================= */
+/* ============================================== */
+/* ÉLÉMENTS HTML                                  */
+/* ============================================== */
 
 const background1 =
     document.getElementById("background1");
@@ -99,11 +73,11 @@ const mapNameText =
     document.getElementById("mapName");
 
 
-/* ============================================= */
-/* PRÉCHARGEMENT DES IMAGES                      */
-/* ============================================= */
+/* ============================================== */
+/* PRÉCHARGEMENT DES IMAGES                       */
+/* ============================================== */
 
-slides.forEach((slide) => {
+slides.forEach(function(slide) {
 
     const img =
         new Image();
@@ -114,26 +88,32 @@ slides.forEach((slide) => {
 });
 
 
-/* ============================================= */
-/* PREMIER SCP                                   */
-/* ============================================= */
+/* ============================================== */
+/* PREMIER SCP                                    */
+/* ============================================== */
 
 let currentSlide = 0;
 
-let currentBackground = 1;
+let activeBackground = 1;
 
 
-/* Temps avant changement */
-/* 8000 = 8 secondes */
+/*
+    Temps entre chaque image.
+
+    8000 = 8 secondes
+*/
 
 const slideDuration =
     8000;
 
 
-/* Première image */
+/* Charge SCP-035 */
 
 background1.style.backgroundImage =
-    `url("${slides[0].image}")`;
+    'url("' +
+    slides[0].image +
+    '")';
+
 
 background1.style.backgroundPosition =
     slides[0].position;
@@ -142,20 +122,19 @@ background1.style.backgroundPosition =
 scpTitle.textContent =
     slides[0].title;
 
+
 scpDescription.textContent =
     slides[0].description;
 
 
-/* ============================================= */
-/* CHANGEMENT SCP                                */
-/* ============================================= */
+/* ============================================== */
+/* TRANSITION ENTRE LES SCP                       */
+/* ============================================== */
 
 function nextSlide() {
 
     currentSlide++;
 
-
-    /* Retour au premier SCP */
 
     if (
         currentSlide >= slides.length
@@ -170,23 +149,27 @@ function nextSlide() {
         slides[currentSlide];
 
 
-    /* Cache texte */
+    /*
+        Commence par cacher le texte
+    */
 
     scpInfo.classList.add(
         "hidden"
     );
 
 
-    setTimeout(() => {
+    setTimeout(function() {
 
         let newBackground;
         let oldBackground;
 
 
-        /* Si fond 1 actuellement visible */
+        /*
+            Fond actuellement utilisé
+        */
 
         if (
-            currentBackground === 1
+            activeBackground === 1
         ) {
 
             newBackground =
@@ -195,11 +178,9 @@ function nextSlide() {
             oldBackground =
                 background1;
 
-            currentBackground = 2;
+            activeBackground = 2;
 
         }
-
-        /* Sinon fond 2 visible */
 
         else {
 
@@ -209,22 +190,28 @@ function nextSlide() {
             oldBackground =
                 background2;
 
-            currentBackground = 1;
+            activeBackground = 1;
 
         }
 
 
-        /* Nouvelle image */
+        /*
+            Charge nouvelle image
+        */
 
         newBackground.style.backgroundImage =
-            `url("${slide.image}")`;
+            'url("' +
+            slide.image +
+            '")';
 
 
         newBackground.style.backgroundPosition =
             slide.position;
 
 
-        /* Relancer animation GTA */
+        /*
+            Relance le zoom GTA
+        */
 
         newBackground.classList.remove(
             "active"
@@ -239,14 +226,18 @@ function nextSlide() {
         );
 
 
-        /* Masquer ancienne image */
+        /*
+            Ancienne image disparaît
+        */
 
         oldBackground.classList.remove(
             "active"
         );
 
 
-        /* Modifier texte */
+        /*
+            Change titre + description
+        */
 
         scpTitle.textContent =
             slide.title;
@@ -256,7 +247,9 @@ function nextSlide() {
             slide.description;
 
 
-        /* Réafficher texte */
+        /*
+            Réaffiche texte
+        */
 
         scpInfo.classList.remove(
             "hidden"
@@ -268,7 +261,9 @@ function nextSlide() {
 }
 
 
-/* Changement automatique */
+/*
+    Lance les changements
+*/
 
 setInterval(
     nextSlide,
@@ -276,16 +271,18 @@ setInterval(
 );
 
 
-/* ============================================= */
-/* PROGRESSION GMOD                              */
-/* ============================================= */
+/* ============================================== */
+/* PROGRESSION GMOD                               */
+/* ============================================== */
 
 let totalFiles = 0;
 
 let filesNeeded = 0;
 
 
-/* Fonction progression */
+/*
+    Met à jour la barre
+*/
 
 function updateProgress() {
 
@@ -299,7 +296,8 @@ function updateProgress() {
 
 
     const downloaded =
-        totalFiles - filesNeeded;
+        totalFiles -
+        filesNeeded;
 
 
     let percent =
@@ -307,38 +305,45 @@ function updateProgress() {
             (
                 downloaded /
                 totalFiles
-            ) * 100
+            )
+            * 100
         );
 
 
-    /* Sécurité 0 → 100 */
+    /*
+        Force entre 0 et 100
+    */
 
     percent =
         Math.max(
             0,
             Math.min(
-                100,
-                percent
+                percent,
+                100
             )
         );
 
 
     progressBar.style.width =
-        percent + "%";
+        percent +
+        "%";
 
 
     percentageText.textContent =
-        percent + "%";
+        percent +
+        "%";
 
 }
 
 
-/* ============================================= */
-/* FONCTIONS GARRY'S MOD                         */
-/* ============================================= */
+/* ============================================== */
+/* FONCTIONS APPELÉES PAR GARRY'S MOD             */
+/* ============================================== */
 
 
-/* Informations serveur */
+/*
+    Informations serveur
+*/
 
 window.GameDetails = function(
     serverName,
@@ -369,13 +374,19 @@ window.GameDetails = function(
 };
 
 
-/* Nombre total de fichiers */
+/*
+    GMod indique le nombre total
+    de fichiers
+*/
 
 window.SetFilesTotal =
 function(total) {
 
     totalFiles =
-        Number(total) || 0;
+        parseInt(
+            total,
+            10
+        ) || 0;
 
 
     updateProgress();
@@ -383,13 +394,19 @@ function(total) {
 };
 
 
-/* Fichiers restants */
+/*
+    GMod indique combien
+    de fichiers restent
+*/
 
 window.SetFilesNeeded =
 function(needed) {
 
     filesNeeded =
-        Number(needed) || 0;
+        parseInt(
+            needed,
+            10
+        ) || 0;
 
 
     updateProgress();
@@ -397,7 +414,9 @@ function(needed) {
 };
 
 
-/* Fichier en téléchargement */
+/*
+    Fichier actuellement téléchargé
+*/
 
 window.DownloadingFile =
 function(fileName) {
@@ -406,13 +425,19 @@ function(fileName) {
         "TÉLÉCHARGEMENT";
 
 
-    fileNameText.textContent =
-        fileName;
+    if (fileName) {
+
+        fileNameText.textContent =
+            fileName;
+
+    }
 
 };
 
 
-/* Changement d'état */
+/*
+    État de connexion envoyé par GMod
+*/
 
 window.SetStatusChanged =
 function(status) {
@@ -430,33 +455,30 @@ function(status) {
 };
 
 
-/* ============================================= */
-/* MODE DÉMO                                     */
-/* ============================================= */
+/* ============================================== */
+/* MODE TEST GITHUB                               */
+/* ============================================== */
 
 /*
-    Pour tester sans GMod :
-
-    ajoute ?demo=1
-
-    Exemple :
+    Pour tester :
 
     https://tonpseudo.github.io/gmod-loading/?demo=1
+
+    Ce mode simule une progression.
 */
 
 
-const parameters =
+const params =
     new URLSearchParams(
         window.location.search
     );
 
 
 if (
-    parameters.get("demo") === "1"
+    params.get("demo") === "1"
 ) {
 
-    let demoProgress =
-        0;
+    let demoProgress = 0;
 
 
     serverNameText.textContent =
@@ -472,43 +494,49 @@ if (
 
 
     const demo =
-        setInterval(() => {
+        setInterval(
+            function() {
 
-            demoProgress++;
-
-
-            progressBar.style.width =
-                demoProgress + "%";
+                demoProgress++;
 
 
-            percentageText.textContent =
-                demoProgress + "%";
+                progressBar.style.width =
+                    demoProgress +
+                    "%";
 
 
-            fileNameText.textContent =
-                "materials/scp/file_" +
-                demoProgress +
-                ".vmt";
-
-
-            if (
-                demoProgress >= 100
-            ) {
-
-                clearInterval(
-                    demo
-                );
-
-
-                statusText.textContent =
-                    "TERMINÉ";
+                percentageText.textContent =
+                    demoProgress +
+                    "%";
 
 
                 fileNameText.textContent =
-                    "Connexion au serveur...";
+                    "materials/scp/file_" +
+                    demoProgress +
+                    ".vmt";
 
-            }
 
-        }, 150);
+                if (
+                    demoProgress >= 100
+                ) {
+
+                    clearInterval(
+                        demo
+                    );
+
+
+                    statusText.textContent =
+                        "CONNEXION";
+
+
+                    fileNameText.textContent =
+                        "Chargement terminé...";
+
+                }
+
+            },
+
+            120
+        );
 
 }
