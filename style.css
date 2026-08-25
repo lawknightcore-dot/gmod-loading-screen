@@ -1,6 +1,6 @@
-/* ======================================== */
-/* BASE                                     */
-/* ======================================== */
+/* =========================
+   BASE
+========================= */
 
 * {
     margin: 0;
@@ -16,21 +16,16 @@ body {
 
 body {
     overflow: hidden;
-
     background: #000;
-
     color: white;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* ======================================== */
-/* FONDS                                    */
-/* ======================================== */
+/* =========================
+   IMAGES DE FOND
+========================= */
 
 .background {
     position: fixed;
@@ -47,230 +42,70 @@ body {
 
     z-index: 0;
 
-    transition: opacity 1.5s ease;
+    transition: opacity 1s ease;
 }
+
+
+/* SCP-035 par défaut */
 
 #background1 {
     background-image: url("./images/scp035.webp");
 }
 
+
+/* Fond actuellement affiché */
+
 .background.active {
     opacity: 1;
 }
 
-.overlay {
-    position: fixed;
-    inset: 0;
 
-    z-index: 1;
+/* =========================
+   ANCIENS EFFETS DÉSACTIVÉS
+========================= */
 
-    pointer-events: none;
-
-    background: rgba(0, 0, 0, 0.35);
-}
-
-
-/* Zoom + déplacement style GTA */
-
-@keyframes gtaCamera {
-
-    from {
-        transform:
-            scale(1.05)
-            translate(0px, 0px);
-    }
-
-    to {
-        transform:
-            scale(1.15)
-            translate(-30px, -10px);
-    }
-
-}
-
-
-/* ======================================== */
-/* OVERLAY                                  */
-/* ======================================== */
-
-.overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 5;
-    pointer-events: none;
-
-    background: rgba(0, 0, 0, 0.15);
-}
-
-.vignette {
-    display: none;
-}
-
+.overlay,
+.vignette,
+.scanlines,
 .noise {
     display: none;
 }
 
-.scanlines {
-    display: none;
-}
 
-/* Ombre sur les bords */
+/* =========================
+   INFORMATIONS SERVEUR
+========================= */
 
-.vignette {
+.server-info {
     position: fixed;
 
-    inset: 0;
-
-    z-index: 6;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle,
-            transparent 25%,
-            rgba(0, 0, 0, 0.85) 100%
-        );
-}
-
-
-/* ======================================== */
-/* SCANLINES                                */
-/* ======================================== */
-
-.scanlines {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 50;
-
-    pointer-events: none;
-
-    opacity: 0.25;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.30) 0px,
-            rgba(0, 0, 0, 0.30) 1px,
-            transparent 1px,
-            transparent 3px
-        );
-
-    animation:
-        flicker 0.15s infinite;
-}
-
-
-@keyframes flicker {
-
-    0% {
-        opacity: 0.20;
-    }
-
-    50% {
-        opacity: 0.30;
-    }
-
-    100% {
-        opacity: 0.22;
-    }
-
-}
-
-
-/* ======================================== */
-/* GRAIN                                    */
-/* ======================================== */
-
-.noise {
-    position: fixed;
-
-    inset: -50%;
-
-    width: 200%;
-    height: 200%;
-
-    z-index: 49;
-
-    pointer-events: none;
-
-    opacity: 0.05;
-
-    background-image:
-        url(
-            "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"
-        );
-
-    animation:
-        noiseMove 0.2s steps(2) infinite;
-}
-
-
-@keyframes noiseMove {
-
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(2%, -3%);
-    }
-
-    50% {
-        transform: translate(-2%, 2%);
-    }
-
-    75% {
-        transform: translate(3%, 2%);
-    }
-
-    100% {
-        transform: translate(-2%, -2%);
-    }
-
-}
-
-
-/* ======================================== */
-/* SERVEUR                                  */
-/* ======================================== */
-
-.server {
-    position: fixed;
-
-    top: 45px;
+    top: 40px;
     left: 60px;
 
-    z-index: 20;
+    z-index: 10;
 }
 
-
 #serverName {
-    font-size: 18px;
-
+    font-size: 20px;
     font-weight: bold;
 
     letter-spacing: 4px;
 }
 
-
 #mapName {
-    margin-top: 7px;
+    margin-top: 8px;
 
-    font-size: 10px;
+    font-size: 11px;
 
     letter-spacing: 2px;
 
-    color:
-        rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 
-/* ======================================== */
-/* INFORMATION SCP                          */
-/* ======================================== */
+/* =========================
+   INFORMATIONS SCP
+========================= */
 
 .scp-info {
     position: fixed;
@@ -280,193 +115,164 @@ body {
 
     width: 550px;
 
-    z-index: 20;
+    transform: translateY(-50%);
 
-    transform:
-        translateY(-50%);
+    z-index: 10;
 
     transition:
-        opacity 0.6s ease,
-        transform 0.6s ease,
-        filter 0.6s ease;
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
 
-/* Au changement de SCP */
+/* Utilisé pendant la transition */
 
 .scp-info.hidden {
     opacity: 0;
 
     transform:
         translateY(-50%)
-        translateX(-60px);
-
-    filter:
-        blur(7px);
+        translateX(-30px);
 }
 
 
 .scp-info h1 {
-    font-size:
-        clamp(50px, 6vw, 90px);
+    font-size: 72px;
 
-    font-weight: 700;
+    font-weight: bold;
 
     letter-spacing: 6px;
 
-    text-shadow:
-        0 0 30px
-        rgba(255, 255, 255, 0.10);
+    color: white;
 }
 
 
-.line {
-    width: 100%;
+/* Ligne sous le titre */
 
+.separator {
+    width: 100%;
     height: 1px;
 
-    margin:
-        20px 0;
+    margin: 20px 0;
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.8),
-            transparent
-        );
+    background: rgba(255, 255, 255, 0.8);
 }
 
+
+/* Description */
 
 .scp-info p {
     max-width: 520px;
 
-    font-family:
-        "Courier New",
-        monospace;
+    font-family: "Courier New", monospace;
 
     font-size: 15px;
 
-    line-height: 1.8;
+    line-height: 1.7;
 
-    color:
-        rgba(255, 255, 255, 0.65);
-
-    text-shadow:
-        0 2px 5px black;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 
-/* ======================================== */
-/* LOADING                                  */
-/* ======================================== */
+/* =========================
+   BARRE DE CHARGEMENT
+========================= */
 
-.loading {
+.loading-container {
     position: fixed;
 
     left: 7%;
-    bottom: 60px;
+    bottom: 55px;
 
-    width:
-        min(600px, 80vw);
+    width: 600px;
+    max-width: 80vw;
 
-    z-index: 20;
+    z-index: 10;
 }
 
 
-.loading-top {
+/* Texte au-dessus de la barre */
+
+.loading-header {
     display: flex;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
     margin-bottom: 10px;
 
-    font-size: 11px;
+    font-size: 12px;
 
     letter-spacing: 2px;
 }
 
 
 #percentage {
-    color:
-        rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 
-/* Barre extérieure */
+/* Fond de la barre */
 
 .progress-background {
     width: 100%;
+    height: 8px;
 
-    height: 5px;
-
-    background:
-        rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.25);
 
     overflow: hidden;
 }
 
 
-/* Barre blanche */
+/* Barre qui avance */
 
 #progressBar {
     width: 0%;
-
     height: 100%;
 
     background: white;
 
-    box-shadow:
-        0 0 12px
-        rgba(255, 255, 255, 0.50);
-
-    transition:
-        width 0.3s ease;
+    transition: width 0.3s ease;
 }
 
+
+/* Nom du fichier téléchargé */
 
 #fileName {
     margin-top: 10px;
 
-    font-size: 9px;
+    font-size: 10px;
 
-    letter-spacing: 1px;
-
-    color:
-        rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.7);
 
     white-space: nowrap;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
 }
 
 
-/* ======================================== */
-/* PETITS ÉCRANS                            */
-/* ======================================== */
+/* =========================
+   PETITS ÉCRANS
+========================= */
 
 @media (max-width: 800px) {
 
-    .server {
+    .server-info {
         left: 30px;
     }
-
 
     .scp-info {
         left: 30px;
 
-        width:
-            calc(100% - 60px);
+        width: calc(100% - 60px);
     }
 
+    .scp-info h1 {
+        font-size: 50px;
+    }
 
-    .loading {
+    .loading-container {
         left: 30px;
 
-        width:
-            calc(100% - 60px);
+        width: calc(100% - 60px);
     }
-
 }
