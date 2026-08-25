@@ -113,7 +113,46 @@ const slides = [
 
 ];
 
+/* ============================================
+   MUSIQUE
+============================================ */
 
+const backgroundMusic =
+    document.getElementById("backgroundMusic");
+
+
+if (backgroundMusic) {
+
+    /* Volume : de 0 à 1 */
+
+    backgroundMusic.volume = 0.20;
+
+
+    /*
+        Essaie de lancer automatiquement
+        la musique.
+    */
+
+    const playPromise =
+        backgroundMusic.play();
+
+
+    if (
+        playPromise !== undefined
+    ) {
+
+        playPromise.catch(function(error) {
+
+            console.log(
+                "Lecture automatique bloquée :",
+                error
+            );
+
+        });
+
+    }
+
+}
 /* ============================================
    ÉLÉMENTS HTML
 ============================================ */
