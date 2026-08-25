@@ -1,0 +1,473 @@
+/* ======================================== */
+/* BASE                                     */
+/* ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+
+    background: #000;
+
+    color: white;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+/* ======================================== */
+/* FONDS                                    */
+/* ======================================== */
+
+.background {
+    position: fixed;
+
+    top: -5%;
+    left: -5%;
+
+    width: 110%;
+    height: 110%;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+
+    filter:
+        brightness(0.55)
+        contrast(1.15);
+
+    transform:
+        scale(1.05);
+
+    transition:
+        opacity 1.5s ease;
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* Image visible */
+
+.background.active {
+    opacity: 1;
+
+    animation:
+        gtaCamera 9s ease-in-out forwards;
+}
+
+
+/* Zoom + déplacement style GTA */
+
+@keyframes gtaCamera {
+
+    from {
+        transform:
+            scale(1.05)
+            translate(0px, 0px);
+    }
+
+    to {
+        transform:
+            scale(1.15)
+            translate(-30px, -10px);
+    }
+
+}
+
+
+/* ======================================== */
+/* OVERLAY                                  */
+/* ======================================== */
+
+.overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.80) 0%,
+            rgba(0, 0, 0, 0.40) 45%,
+            rgba(0, 0, 0, 0.25) 100%
+        );
+}
+
+
+/* Ombre sur les bords */
+
+.vignette {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 6;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 25%,
+            rgba(0, 0, 0, 0.85) 100%
+        );
+}
+
+
+/* ======================================== */
+/* SCANLINES                                */
+/* ======================================== */
+
+.scanlines {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 50;
+
+    pointer-events: none;
+
+    opacity: 0.25;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.30) 0px,
+            rgba(0, 0, 0, 0.30) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    animation:
+        flicker 0.15s infinite;
+}
+
+
+@keyframes flicker {
+
+    0% {
+        opacity: 0.20;
+    }
+
+    50% {
+        opacity: 0.30;
+    }
+
+    100% {
+        opacity: 0.22;
+    }
+
+}
+
+
+/* ======================================== */
+/* GRAIN                                    */
+/* ======================================== */
+
+.noise {
+    position: fixed;
+
+    inset: -50%;
+
+    width: 200%;
+    height: 200%;
+
+    z-index: 49;
+
+    pointer-events: none;
+
+    opacity: 0.05;
+
+    background-image:
+        url(
+            "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"
+        );
+
+    animation:
+        noiseMove 0.2s steps(2) infinite;
+}
+
+
+@keyframes noiseMove {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(2%, -3%);
+    }
+
+    50% {
+        transform: translate(-2%, 2%);
+    }
+
+    75% {
+        transform: translate(3%, 2%);
+    }
+
+    100% {
+        transform: translate(-2%, -2%);
+    }
+
+}
+
+
+/* ======================================== */
+/* SERVEUR                                  */
+/* ======================================== */
+
+.server {
+    position: fixed;
+
+    top: 45px;
+    left: 60px;
+
+    z-index: 20;
+}
+
+
+#serverName {
+    font-size: 18px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+}
+
+
+#mapName {
+    margin-top: 7px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255, 255, 255, 0.45);
+}
+
+
+/* ======================================== */
+/* INFORMATION SCP                          */
+/* ======================================== */
+
+.scp-info {
+    position: fixed;
+
+    left: 7%;
+    top: 48%;
+
+    width: 550px;
+
+    z-index: 20;
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease,
+        filter 0.6s ease;
+}
+
+
+/* Au changement de SCP */
+
+.scp-info.hidden {
+    opacity: 0;
+
+    transform:
+        translateY(-50%)
+        translateX(-60px);
+
+    filter:
+        blur(7px);
+}
+
+
+.scp-info h1 {
+    font-size:
+        clamp(50px, 6vw, 90px);
+
+    font-weight: 700;
+
+    letter-spacing: 6px;
+
+    text-shadow:
+        0 0 30px
+        rgba(255, 255, 255, 0.10);
+}
+
+
+.line {
+    width: 100%;
+
+    height: 1px;
+
+    margin:
+        20px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.8),
+            transparent
+        );
+}
+
+
+.scp-info p {
+    max-width: 520px;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color:
+        rgba(255, 255, 255, 0.65);
+
+    text-shadow:
+        0 2px 5px black;
+}
+
+
+/* ======================================== */
+/* LOADING                                  */
+/* ======================================== */
+
+.loading {
+    position: fixed;
+
+    left: 7%;
+    bottom: 60px;
+
+    width:
+        min(600px, 80vw);
+
+    z-index: 20;
+}
+
+
+.loading-top {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    margin-bottom: 10px;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+#percentage {
+    color:
+        rgba(255, 255, 255, 0.65);
+}
+
+
+/* Barre extérieure */
+
+.progress-background {
+    width: 100%;
+
+    height: 5px;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    overflow: hidden;
+}
+
+
+/* Barre blanche */
+
+#progressBar {
+    width: 0%;
+
+    height: 100%;
+
+    background: white;
+
+    box-shadow:
+        0 0 12px
+        rgba(255, 255, 255, 0.50);
+
+    transition:
+        width 0.3s ease;
+}
+
+
+#fileName {
+    margin-top: 10px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255, 255, 255, 0.35);
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ======================================== */
+/* PETITS ÉCRANS                            */
+/* ======================================== */
+
+@media (max-width: 800px) {
+
+    .server {
+        left: 30px;
+    }
+
+
+    .scp-info {
+        left: 30px;
+
+        width:
+            calc(100% - 60px);
+    }
+
+
+    .loading {
+        left: 30px;
+
+        width:
+            calc(100% - 60px);
+    }
+
+}
