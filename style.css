@@ -317,3 +317,29 @@ body {
     }
 
 }
+
+/* =============================
+   CRÉDIT MUSIQUE
+============================= */
+
+.music-credit {
+    position: fixed;
+
+    right: 25px;
+    bottom: 20px;
+
+    z-index: 20;
+
+    text-align: right;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color: rgba(255, 255, 255, 0.45);
+
+    text-shadow:
+        0 2px 5px black;
+}
