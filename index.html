@@ -101,10 +101,23 @@
     </div>
     <!-- MUSIQUE -->
 
-<audio id="backgroundMusic" autoplay loop preload="auto">
+<!-- On ajoute "muted" pour que le navigateur autorise l'autoplay sans bloquer -->
+<audio id="backgroundMusic" autoplay loop muted preload="auto">
     <source src="./audio/hitman.mp3" type="audio/mpeg">
 </audio>
 
+<script>
+    const audio = document.getElementById('backgroundMusic');
+
+    // Dès que l'utilisateur clique n'importe où, le son s'active
+    document.body.addEventListener('click', function() {
+        audio.muted = false;
+        // Si l'autoplay a quand même échoué, on force la lecture
+        if (audio.paused) {
+            audio.play();
+        }
+    }, { once: true });
+</script>
 
 <!-- CRÉDIT -->
 
