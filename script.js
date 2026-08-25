@@ -1,29 +1,111 @@
-/* ============================================== */
-/* LISTE DES SCP                                  */
-/* ============================================== */
+/* ============================================
+   LISTE DES SLIDES
+============================================ */
 
 const slides = [
 
-    {
-        title: "SCP-035",
+    /* ========================================
+       SCP-966
+    ======================================== */
 
-        image: "images/scp035.webp",
+    {
+        title: "SCP-966",
+
+        image:
+            "./images/scp966.png",
 
         description:
-            "SCP-035 est un masque ancien et conscient, capable d'influencer mentalement et de posséder quiconque le porte.",
+            "Des créatures presque invisibles à l'œil humain. SCP-966 traque ses victimes en les privant progressivement de sommeil, jusqu'à les pousser à l'épuisement total.",
 
         position:
             "center center"
     },
 
 
+    /* ========================================
+       SCP-106
+    ======================================== */
+
+    {
+        title: "SCP-106",
+
+        image:
+            "./images/scp106.png",
+
+        description:
+            "Une entité humanoïde extrêmement hostile, capable de traverser la matière solide. SCP-106 aime traquer ses victimes avant de les entraîner dans sa mystérieuse dimension de poche.",
+
+        position:
+            "center center"
+    },
+
+
+    /* ========================================
+       SCP-999
+    ======================================== */
+
+    {
+        title: "SCP-999",
+
+        image:
+            "./images/scp999.png",
+
+        description:
+            "Une créature gélatineuse aussi inoffensive qu'affectueuse. SCP-999 recherche constamment le contact humain et provoque un profond sentiment de bonheur chez les personnes qui l'approchent.",
+
+        position:
+            "center center"
+    },
+
+
+    /* ========================================
+       SCP-682
+    ======================================== */
+
+    {
+        title: "SCP-682",
+
+        image:
+            "./images/scp682.png",
+
+        description:
+            "Une créature extrêmement intelligente, agressive et résistante. SCP-682 éprouve une profonde hostilité envers toute forme de vie et possède une capacité d'adaptation exceptionnelle.",
+
+        position:
+            "center center"
+    },
+
+
+    /* ========================================
+       SCP-049
+    ======================================== */
+
     {
         title: "SCP-049",
 
-        image: "images/scp049.webp",
+        image:
+            "./images/scp049.png",
 
         description:
-            "SCP-049 est une entité humanoïde connue sous le nom de Docteur de la Peste. Il affirme pouvoir guérir une mystérieuse pestilence.",
+            "Une mystérieuse entité humanoïde convaincue que l'humanité est touchée par une maladie qu'elle appelle « la Pestilence ». SCP-049 cherche constamment à la « soigner » avec des méthodes plutôt radicales.",
+
+        position:
+            "center center"
+    },
+
+
+    /* ========================================
+       AGENT DE SÉCURITÉ
+    ======================================== */
+
+    {
+        title: "AGENT DE SÉCURITÉ",
+
+        image:
+            "./images/agentsecurite.png",
+
+        description:
+            "Chargé de surveiller les Classe-D, de maintenir l'ordre et d'être en première ligne lors des déconfinements... des situations parfois moins faciles à gérer que certains Classe-D.",
 
         position:
             "center center"
@@ -32,16 +114,15 @@ const slides = [
 ];
 
 
-/* ============================================== */
-/* ÉLÉMENTS HTML                                  */
-/* ============================================== */
+/* ============================================
+   ÉLÉMENTS HTML
+============================================ */
 
 const background1 =
     document.getElementById("background1");
 
 const background2 =
     document.getElementById("background2");
-
 
 const scpInfo =
     document.getElementById("scpInfo");
@@ -51,7 +132,6 @@ const scpTitle =
 
 const scpDescription =
     document.getElementById("scpDescription");
-
 
 const progressBar =
     document.getElementById("progressBar");
@@ -65,7 +145,6 @@ const statusText =
 const fileNameText =
     document.getElementById("fileName");
 
-
 const serverNameText =
     document.getElementById("serverName");
 
@@ -73,24 +152,29 @@ const mapNameText =
     document.getElementById("mapName");
 
 
-/* ============================================== */
-/* PRÉCHARGEMENT DES IMAGES                       */
-/* ============================================== */
+/* ============================================
+   PRÉCHARGEMENT DES IMAGES
+============================================ */
+
+/*
+    Cela évite d'avoir un écran noir
+    lors du premier changement.
+*/
 
 slides.forEach(function(slide) {
 
-    const img =
+    const image =
         new Image();
 
-    img.src =
+    image.src =
         slide.image;
 
 });
 
 
-/* ============================================== */
-/* PREMIER SCP                                    */
-/* ============================================== */
+/* ============================================
+   SLIDER
+============================================ */
 
 let currentSlide = 0;
 
@@ -98,136 +182,121 @@ let activeBackground = 1;
 
 
 /*
-    Temps entre chaque image.
+    8000 = 8 secondes.
 
-    8000 = 8 secondes
+    Change ici si tu veux :
+    5000 = 5 secondes
+    10000 = 10 secondes
 */
 
 const slideDuration =
     8000;
 
 
-/* Charge SCP-035 */
+/* ============================================
+   PREMIER SLIDE
+============================================ */
 
-background1.style.backgroundImage =
-    'url("' +
-    slides[0].image +
-    '")';
+background1.src =
+    slides[0].image;
 
-
-background1.style.backgroundPosition =
+background1.style.objectPosition =
     slides[0].position;
-
 
 scpTitle.textContent =
     slides[0].title;
-
 
 scpDescription.textContent =
     slides[0].description;
 
 
-/* ============================================== */
-/* TRANSITION ENTRE LES SCP                       */
-/* ============================================== */
+/* ============================================
+   CHANGEMENT
+============================================ */
 
-function nextSlide() {
+function changeSlide() {
 
-    currentSlide++;
+    /*
+        Prépare l'index suivant
+    */
+
+    let nextIndex =
+        currentSlide + 1;
 
 
     if (
-        currentSlide >= slides.length
+        nextIndex >= slides.length
     ) {
 
-        currentSlide = 0;
+        nextIndex = 0;
 
     }
 
 
-    const slide =
-        slides[currentSlide];
+    const nextSlide =
+        slides[nextIndex];
 
 
     /*
-        Commence par cacher le texte
+        Choisit le fond invisible.
     */
 
-    scpInfo.classList.add(
-        "hidden"
-    );
+    let newBackground;
+    let oldBackground;
 
 
-    setTimeout(function() {
+    if (
+        activeBackground === 1
+    ) {
 
-        let newBackground;
-        let oldBackground;
+        newBackground =
+            background2;
 
+        oldBackground =
+            background1;
+
+    }
+
+    else {
+
+        newBackground =
+            background1;
+
+        oldBackground =
+            background2;
+
+    }
+
+
+    /*
+        On charge l'image AVANT
+        de lancer la transition.
+    */
+
+    const loader =
+        new Image();
+
+
+    loader.onload =
+    function() {
 
         /*
-            Fond actuellement utilisé
+            Prépare la nouvelle image.
         */
 
-        if (
-            activeBackground === 1
-        ) {
+        newBackground.src =
+            nextSlide.image;
 
-            newBackground =
-                background2;
 
-            oldBackground =
-                background1;
-
-            activeBackground = 2;
-
-        }
-
-        else {
-
-            newBackground =
-                background1;
-
-            oldBackground =
-                background2;
-
-            activeBackground = 1;
-
-        }
+        newBackground.style.objectPosition =
+            nextSlide.position;
 
 
         /*
-            Charge nouvelle image
-        */
+            ÉTAPE 1
 
-        newBackground.style.backgroundImage =
-            'url("' +
-            slide.image +
-            '")';
-
-
-        newBackground.style.backgroundPosition =
-            slide.position;
-
-
-        /*
-            Relance le zoom GTA
-        */
-
-        newBackground.classList.remove(
-            "active"
-        );
-
-
-        void newBackground.offsetWidth;
-
-
-        newBackground.classList.add(
-            "active"
-        );
-
-
-        /*
-            Ancienne image disparaît
+            Image + texte disparaissent
+            EN MÊME TEMPS.
         */
 
         oldBackground.classList.remove(
@@ -235,54 +304,118 @@ function nextSlide() {
         );
 
 
-        /*
-            Change titre + description
-        */
-
-        scpTitle.textContent =
-            slide.title;
-
-
-        scpDescription.textContent =
-            slide.description;
-
-
-        /*
-            Réaffiche texte
-        */
-
-        scpInfo.classList.remove(
+        scpInfo.classList.add(
             "hidden"
         );
 
 
-    }, 600);
+        /*
+            Attend le milieu du fondu.
+        */
+
+        setTimeout(function() {
+
+            /*
+                ÉTAPE 2
+
+                Change le texte pendant
+                qu'il est invisible.
+            */
+
+            scpTitle.textContent =
+                nextSlide.title;
+
+
+            scpDescription.textContent =
+                nextSlide.description;
+
+
+            /*
+                Relance éventuellement
+                l'animation de zoom.
+            */
+
+            newBackground.classList.remove(
+                "active"
+            );
+
+
+            void newBackground.offsetWidth;
+
+
+            /*
+                ÉTAPE 3
+
+                Nouvelle image + nouveau texte
+                apparaissent EN MÊME TEMPS.
+            */
+
+            newBackground.classList.add(
+                "active"
+            );
+
+
+            scpInfo.classList.remove(
+                "hidden"
+            );
+
+
+            /*
+                Nouveau slide actif.
+            */
+
+            currentSlide =
+                nextIndex;
+
+
+            if (
+                activeBackground === 1
+            ) {
+
+                activeBackground = 2;
+
+            }
+
+            else {
+
+                activeBackground = 1;
+
+            }
+
+        }, 800);
+
+    };
+
+
+    /*
+        Commence à charger
+        l'image suivante.
+    */
+
+    loader.src =
+        nextSlide.image;
 
 }
 
 
-/*
-    Lance les changements
-*/
+/* ============================================
+   CHANGE AUTOMATIQUEMENT
+============================================ */
 
 setInterval(
-    nextSlide,
+    changeSlide,
     slideDuration
 );
 
 
-/* ============================================== */
-/* PROGRESSION GMOD                               */
-/* ============================================== */
+/* ============================================
+   PROGRESSION GMOD
+============================================ */
 
 let totalFiles = 0;
 
 let filesNeeded = 0;
 
-
-/*
-    Met à jour la barre
-*/
 
 function updateProgress() {
 
@@ -311,41 +444,36 @@ function updateProgress() {
 
 
     /*
-        Force entre 0 et 100
+        Empêche moins de 0
+        ou plus de 100.
     */
 
     percent =
         Math.max(
             0,
             Math.min(
-                percent,
-                100
+                100,
+                percent
             )
         );
 
 
     progressBar.style.width =
-        percent +
-        "%";
+        percent + "%";
 
 
     percentageText.textContent =
-        percent +
-        "%";
+        percent + "%";
 
 }
 
 
-/* ============================================== */
-/* FONCTIONS APPELÉES PAR GARRY'S MOD             */
-/* ============================================== */
+/* ============================================
+   INFORMATIONS GMOD
+============================================ */
 
-
-/*
-    Informations serveur
-*/
-
-window.GameDetails = function(
+window.GameDetails =
+function(
     serverName,
     serverURL,
     mapName,
@@ -374,19 +502,15 @@ window.GameDetails = function(
 };
 
 
-/*
-    GMod indique le nombre total
-    de fichiers
-*/
+/* ============================================
+   TOTAL DE FICHIERS
+============================================ */
 
 window.SetFilesTotal =
 function(total) {
 
     totalFiles =
-        parseInt(
-            total,
-            10
-        ) || 0;
+        Number(total) || 0;
 
 
     updateProgress();
@@ -394,19 +518,15 @@ function(total) {
 };
 
 
-/*
-    GMod indique combien
-    de fichiers restent
-*/
+/* ============================================
+   FICHIERS RESTANTS
+============================================ */
 
 window.SetFilesNeeded =
 function(needed) {
 
     filesNeeded =
-        parseInt(
-            needed,
-            10
-        ) || 0;
+        Number(needed) || 0;
 
 
     updateProgress();
@@ -414,9 +534,9 @@ function(needed) {
 };
 
 
-/*
-    Fichier actuellement téléchargé
-*/
+/* ============================================
+   FICHIER ACTUEL
+============================================ */
 
 window.DownloadingFile =
 function(fileName) {
@@ -435,9 +555,9 @@ function(fileName) {
 };
 
 
-/*
-    État de connexion envoyé par GMod
-*/
+/* ============================================
+   STATUT GMOD
+============================================ */
 
 window.SetStatusChanged =
 function(status) {
@@ -455,18 +575,16 @@ function(status) {
 };
 
 
-/* ============================================== */
-/* MODE TEST GITHUB                               */
-/* ============================================== */
+/* ============================================
+   MODE DÉMO
+============================================ */
 
 /*
-    Pour tester :
+    Test :
 
-    https://tonpseudo.github.io/gmod-loading/?demo=1
-
-    Ce mode simule une progression.
+    https://lawknightcore-dot.github.io/
+    gmod-loading-screen/?demo=1
 */
-
 
 const params =
     new URLSearchParams(
@@ -482,7 +600,7 @@ if (
 
 
     serverNameText.textContent =
-        "SCP ROLEPLAY FR";
+        "SCP ROLEPLAY";
 
 
     mapNameText.textContent =
@@ -494,49 +612,43 @@ if (
 
 
     const demo =
-        setInterval(
-            function() {
+        setInterval(function() {
 
-                demoProgress++;
-
-
-                progressBar.style.width =
-                    demoProgress +
-                    "%";
+            demoProgress++;
 
 
-                percentageText.textContent =
-                    demoProgress +
-                    "%";
+            progressBar.style.width =
+                demoProgress + "%";
+
+
+            percentageText.textContent =
+                demoProgress + "%";
+
+
+            fileNameText.textContent =
+                "materials/scp/file_" +
+                demoProgress +
+                ".vmt";
+
+
+            if (
+                demoProgress >= 100
+            ) {
+
+                clearInterval(
+                    demo
+                );
+
+
+                statusText.textContent =
+                    "CONNEXION";
 
 
                 fileNameText.textContent =
-                    "materials/scp/file_" +
-                    demoProgress +
-                    ".vmt";
+                    "Chargement terminé...";
 
+            }
 
-                if (
-                    demoProgress >= 100
-                ) {
-
-                    clearInterval(
-                        demo
-                    );
-
-
-                    statusText.textContent =
-                        "CONNEXION";
-
-
-                    fileNameText.textContent =
-                        "Chargement terminé...";
-
-                }
-
-            },
-
-            120
-        );
+        }, 150);
 
 }
